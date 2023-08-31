@@ -1,0 +1,21 @@
+version: '3'
+services:
+  ntfy-server:
+    image: binwiederhier/ntfy
+    container_name: ntfy-server
+    ports:
+      - "80:80"
+    volumes:
+      - /path/to/ntfy:/var/cache/ntfy 
+      - /etc/ntfy/:/etc/ntfy/ # make sure this is where your server.yml is located
+    command:
+      - serve
+      - "--cache-file"
+      - "/var/cache/ntfy/cache.db"
+    networks:
+      frontend:
+          ipv4_address:  #your static ip address
+
+networks:
+  frontend:
+    external: true
